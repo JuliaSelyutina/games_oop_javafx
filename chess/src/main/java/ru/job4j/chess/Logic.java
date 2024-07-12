@@ -3,6 +3,7 @@ package ru.job4j.chess;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
 import java.util.Arrays;
+import java.util.Optional;
 
 public final class Logic {
     private final Figure[] figures = new Figure[32];
@@ -22,15 +23,21 @@ public final class Logic {
 
     private boolean free(Cell[] steps) throws OccupiedCellException {
         for (Cell step : steps) {
-            for (int index = 0; index != figures.length; index++) {
-                if (figures[index] != null
-                        && figures[index].position() != null
-                        && figures[index].position().equals(step)) {
-                    throw new OccupiedCellException("There is a figure on the way. Movement is not possible.");
-                }
+            for (int i = 0; i != figures.length; i++) {
+                checkWay(figures[i], step);
             }
         }
         return true;
+    }
+
+    private void checkWay(Figure figure, Cell step) throws OccupiedCellException {
+        boolean isNotFree = Optional.ofNullable(figure)
+                .map(Figure::position)
+                .filter(p -> p.equals(step))
+                .isPresent();
+        if (isNotFree) {
+            throw new OccupiedCellException("There is a figure on the way. Movement is not possible.");
+        }
     }
 
     public void clean() {
