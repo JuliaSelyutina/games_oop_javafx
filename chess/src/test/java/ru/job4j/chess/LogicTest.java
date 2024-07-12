@@ -32,6 +32,6 @@ public class LogicTest {
         OccupiedCellException exception = assertThrows(OccupiedCellException.class, () -> {
             logic.move(position, dest);
         });
-        assertThat(exception.getMessage()).isEqualTo("There is a figure on the way. Movement is not possible.");
+        assertThat(exception.getMessage()).isEqualTo("There is a figure on the way.");
     }
 }

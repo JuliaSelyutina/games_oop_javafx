@@ -36,7 +36,7 @@ public final class Logic {
                 .filter(p -> p.equals(step))
                 .isPresent();
         if (isNotFree) {
-            throw new OccupiedCellException("There is a figure on the way. Movement is not possible.");
+            throw new OccupiedCellException("There is a figure on the way.");
         }
     }
 
