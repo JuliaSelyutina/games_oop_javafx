@@ -21,6 +21,15 @@ public final class Logic {
     }
 
     private boolean free(Cell[] steps) throws OccupiedCellException {
+        for (Cell step : steps) {
+            for (int index = 0; index != figures.length; index++) {
+                if (figures[index] != null
+                        && figures[index].position() != null
+                        && figures[index].position().equals(step)) {
+                    throw new OccupiedCellException("There is a figure on the way. Movement is not possible.");
+                }
+            }
+        }
         return true;
     }
 
