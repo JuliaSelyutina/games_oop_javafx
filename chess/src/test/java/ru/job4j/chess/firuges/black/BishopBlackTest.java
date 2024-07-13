@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import ru.job4j.chess.firuges.Cell;
 
-
 class BishopBlackTest {
     @Test
     public void whenBishopBlackCreatedPositionShouldBeTheSame() {
@@ -23,7 +22,7 @@ class BishopBlackTest {
     }
 
     @Test
-    void WhenTheWayIsCorrect() {
+    void whenTheWayIsCorrect() {
         final Cell position = Cell.C1;
         final Cell dest = Cell.G5;
         final Cell[] expectedCells = {Cell.D2, Cell.E3, Cell.F4, Cell.G5};
@@ -33,10 +32,11 @@ class BishopBlackTest {
     }
 
     @Test
-    void WhenWayIsNotDiagonalThenShouldBeException() {
+    void whenWayIsNotDiagonalThenShouldBeException() {
         final Cell start = Cell.D2;
         final Cell dest = Cell.F4;
         BishopBlack newBishopBlack = new BishopBlack(start);
-        assertThat(newBishopBlack.way(start)).overridingErrorMessage(String.format("Could not move by diagonal from %s to %s", start, dest));
+        assertThat(newBishopBlack.way(start)).
+                overridingErrorMessage(String.format("Not diagonal from %s to %s", start, dest));
     }
 }
