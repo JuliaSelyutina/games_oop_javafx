@@ -23,21 +23,13 @@ public final class Logic {
 
     private boolean free(Cell[] steps) throws OccupiedCellException {
         for (Cell step : steps) {
-            for (int i = 0; i != figures.length; i++) {
-                checkWay(figures[i], step);
+            for (Figure figure : figures) {
+                if (figure != null && figure.position().equals(step)) {
+                    throw new OccupiedCellException("There is a figure on the way.");
+                }
             }
         }
         return true;
-    }
-
-    private void checkWay(Figure figure, Cell step) throws OccupiedCellException {
-        boolean isNotFree = Optional.ofNullable(figure)
-                .map(Figure::position)
-                .filter(p -> p.equals(step))
-                .isPresent();
-        if (isNotFree) {
-            throw new OccupiedCellException("There is a figure on the way.");
-        }
     }
 
     public void clean() {
